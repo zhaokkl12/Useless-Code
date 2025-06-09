@@ -1,0 +1,31 @@
+import itertools
+import time
+
+def brute_force_4digit(target):
+    """尝试所有4位数字组合找到目标密码"""
+    digits = '0123456789'
+    total = 10**4  # 总共10000种组合
+    
+    for i, combo in enumerate(itertools.product(digits, repeat=4)):
+        attempt = ''.join(combo)
+        # 模拟实际验证过程（此处替换为真实验证逻辑）
+        if attempt == target:
+            print(f"\n破解成功！密码是: {attempt}")
+            print(f"尝试次数: {i+1}/{total}")
+            return attempt
+        
+        # 进度显示（每1000次打印一次）
+        if (i+1) % 1000 == 0:
+            print(f"已尝试: {i+1}/{total} 组合", end='\r')
+    
+    print("\n未找到匹配密码")
+    return None
+
+# 测试示例
+if __name__ == "__main__":
+    target_password = "0420"  # 要破解的目标密码
+    start_time = time.time()
+    
+    brute_force_4digit(target_password)
+    
+    print(f"耗时: {time.time() - start_time:.2f}秒")
